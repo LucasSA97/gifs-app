@@ -17,7 +17,7 @@ export class GifsService {
     return [...this._tagsHistory]
   }
 
-  private organizedHistory( tag : string) {
+  private organizedHistory ( tag : string) {
 
     tag = tag.toLowerCase()
 
@@ -27,10 +27,14 @@ export class GifsService {
 
     this._tagsHistory.unshift( tag );
     this._tagsHistory = this._tagsHistory.splice(0,10)
-
+    this.saveLocalStorage();
   }
 
-  public  searchTag(tag : string ): void {
+  private saveLocalStorage ( ) : void {
+    localStorage.setItem( 'history', JSON.stringify( this._tagsHistory ) )
+  }
+
+  public searchTag ( tag : string ): void {
     if( tag.length === 0 ) return
     this.organizedHistory( tag )
 
@@ -42,7 +46,7 @@ export class GifsService {
     this.http.get<SearchResponse>(`${ this.serviceUrl }/search`, { params })
     .subscribe( res  => {
       this.gifList = res.data
-      
+
     })
 
 
