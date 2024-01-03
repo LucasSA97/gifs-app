@@ -42,12 +42,9 @@ export class GifsService {
     this.http.get<SearchResponse>(`${ this.serviceUrl }/search`, { params })
     .subscribe( res  => {
       this.gifList = res.data
-      console.log( {} )
+      
     })
 
-      // fetch('https://api.giphy.com/v1/gifs/search?api_key=z7v6pdQ4cIaUAxoXnEjwCLER9Fp084ei&q=valorant&limit=10')
-      //   .then(res => res.json())
-      //   .then( data => console.log(data))
 
 
   }
